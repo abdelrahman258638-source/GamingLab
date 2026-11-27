@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 103420394}
   - component: {fileID: 103420396}
   - component: {fileID: 103420397}
+  - component: {fileID: 103420398}
   m_Layer: 0
   m_Name: Player_0
   m_TagString: Player
@@ -302,6 +303,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &103420398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103420391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023adc5df9476a943b0aaf09bed1df84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  lives: 3
+  flickerDuration: 0.1
+  isImmune: 0
+  immunityDuration: 1.5
 --- !u!1 &145616733
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,9 +749,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 103420393}
   Cameraspeed: 6
-  minX: 22
+  minX: 5
   maxX: 65
-  minY: 0
+  minY: 7.9
   maxY: 15
 --- !u!114 &519420035
 MonoBehaviour:
@@ -747,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59eb77a1372b954f843cc64f7fb45f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetZoom: 6
+  TargetZoom: 10
   ZoomSpeed: 3
 --- !u!1 &900799933
 GameObject:
