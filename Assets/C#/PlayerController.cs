@@ -16,8 +16,16 @@ public class PlayerController : MonoBehaviour
     public LayerMask whatIsGround; // what counts as ground (set to the Ground layer)
     private bool grounded; // true if the character is standing on solid ground
 
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
+
+    [SerializeField] private Animator anim; 
+
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        anim= GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -30,24 +38,35 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(L)) // When user presses the left arrow button
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            if(sr != null) sr.flipX = true;
             // moves left along the x-axis without disrupting the jump
-
-            if (GetComponent<SpriteRenderer>() != null)
-            {
-                GetComponent<SpriteRenderer>().flipX = true;
-            }
         }
 
-        if (Input.GetKey(R)) // When user presses the right arrow button
+        else if (Input.GetKey(R)) // When user presses the right arrow button
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+           rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
             // moves right along the x-axis without disrupting the jump
+            if(sr != null) sr.flipX = false;
+        }
+        else
+        {
+            if(grounded) rb.velocity = new Vector2(0f, rb.velocity.y);
 
-            if (GetComponent<SpriteRenderer>() != null)
-            {
-                GetComponent<SpriteRenderer>().flipX = false;
-            }
+            else
+                rb.velocity = new Vector2(rb.velocity.x * 0.98f, rb.velocity.y);
+        }
+        //  Exercise #09: vertical velocity -> Jump/Fall blend tree
+        // anim.SetFloat("Height", rb.velocity.y);
+
+        // Exercise #09: grounded state -> enter/exit the jumping blend tree
+        anim.SetBool("Grounded", grounded);
+
+        if(Input.GetAxis("Horizontal") != 0){
+             anim.SetBool("IsRunning",true);
+        }
+        else{
+             anim.SetBool("IsRunning",false);
         }
     }
 
@@ -59,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpHeight);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x,jumpHeight);
         // jumps vertically along the y-axis without disrupting horizontal movement
     }
 }
