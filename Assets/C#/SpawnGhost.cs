@@ -5,14 +5,23 @@ using UnityEngine;
 public class SpawnGhost : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+   // Place the respawnable enemy prefab into this variable
+    public Transform enemy;
+
+    // Place the gameObject you want the enemy prefab to spawn at
+    public Transform spawnPoint;
+
+    void RespawnEnemy()
     {
-        
+        // Create an instance of the enemy at the spawn point's position and rotation values
+        Instantiate(enemy, spawnPoint.transform.position, spawnPoint.transform.rotation);
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.gameObject.tag == "Player")
+        {
+            RespawnEnemy();
+        }
     }
 }

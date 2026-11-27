@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostEnemy : MonoBehaviour
+public class GhostEnemy : EnemyController
 {
-    // Start is called before the first frame update
-    void Start()
+    // Ghosts pass through walls, so the trigger function is overridden
+    // to remove the Flip() call when hitting a wall
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.tag == "Player")
+        {
+            FindObjectOfType<PlayerStats>().TakeDamage(damage);
+            Flip();
+        }
     }
 }

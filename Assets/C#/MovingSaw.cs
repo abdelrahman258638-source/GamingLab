@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MovingSaw : MonoBehaviour
+ // Start is called before the first frame update
+   public class MovingSaw : EnemyController
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform player;
+
+    void FixedUpdate()
     {
-        
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position,
+            maxSpeed * Time.deltaTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    // The saw does not flip when it hits the player, only when it hits a wall
+    void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.tag == "Player")
+        {
+            FindObjectOfType<PlayerStats>().TakeDamage(damage);
+        }
+        else if (other.tag == "Wall")
+        {
+            Flip();
+        }
     }
 }
