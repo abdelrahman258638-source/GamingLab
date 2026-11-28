@@ -51,9 +51,12 @@ TagManager:
   - name: grounded
     uniqueID: 2901789685
     locked: 0
+  - name: object
+    uniqueID: 2538156913
+    locked: 0
   - name: Player
     uniqueID: 4219102903
     locked: 0
-  - name: object
-    uniqueID: 2538156913
+  - name: Enemy
+    uniqueID: 1259544491
     locked: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
-  public float maxSpeed = 2;
+    public float maxSpeed = 2;
     public int damage = 1;
     public SpriteRenderer sr;
 
